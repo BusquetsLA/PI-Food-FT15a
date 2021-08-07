@@ -1,7 +1,107 @@
+const { Router } = require('express');
+const axios = require('axios');
+const { Recipe, Diet, RexipeXDiet } = require('../db');
+const { URL_ALL, URL_BY_ID } = require('../utils/constants');
+const { API_KEY } = process.env;
+
+// ---------------- //
+const getAllApi = async () => {
+    let callResponse = await axios.getAllApi(`${URL_ALL}?apiKey=${API_KEY}${URL_INFO}&number=100`); // el max de 100 recetas
+    let allApiRecipes = callResponse.data.results.map( recipe => {
+        let dietTypes = recipe.diets.map((diet) => (diet = {name: diet}));
+        return {
+            id: recipe.id,
+            title: recipe.title,
+            spoonacularScore: recipe.spoonacularScore,
+            // healthScore: recipe.healthScore,
+            // analyzedInstructions: recipe.analyzedInstructions,
+            image: recipe.image,
+            Diets: dietTypes,
+        };
+    });
+    return allApiRecipes;
+};
+const getAllDb = async () => {
+    let allDbRecipes = await Recipe.findAll({
+        include: {
+            model: Diet,
+            attributes: ['name'],
+        },
+    });
+    return allDbRecipes;
+};
+const getAllRecipes = async () => {
+    let allApiRecipes = await getAllApi();
+    let allDbRecipes = await getAllDb();
+    let allRecipes = [...allDbRecipes, ...allApiRecipes];
+    return allRecipes;
+};
+
+const getRecipeById = async (id) => {
+    if (id.includes('-')) { // uuidv4
+        try {
+            const recipeFound = await Recipe.findOne({
+                where: {id},
+                include: {
+                    model: Diet,
+                    attributes: ['name'],
+                } // buscamos en db
+            });
+            return recipeFound;
+        } catch (error) {
+            next(error);
+        }
+    } else {
+        try {
+            let callResponse = await axios.getAllApi(`${URL_BY_ID}${id}/information?apiKey=${API_KEY}`);
+            let recipe = callResponse.data;
+            let dietTypes = recipe.diets.map((diet) => (diet = {name: diet})); // le carga los tipos de dieta en un array
+            let recipeFound = {
+                id: recipe.id,
+                title: recipe.title,
+                summary: recipe.summary,
+                spoonacularScore: recipe.spoonacularScore,
+                healthScore: recipe.healthScore,
+                analyzedInstructions: recipe.analyzedInstructions,
+                image: recipe.image,
+                Diets: dietTypes,
+            };
+            return recipeFound;
+        } catch (error) {
+            next(error);
+        }
+    }
+};
+// ---------------- //
 // GET /recipes?name="...":
-// Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
-// Si no existe ninguna receta mostrar un mensaje adecuado
+router.get('/', async (req, res) => {
+    const {name} = req.query;
+    let allRecipes = await getAllRecipes();
+    if (name) {
+        let gameFound = allRecipes.filter(e => e.title.toLowerCase().includes(name.toLowerCase()));
+        let gamesList = gameFound.slice(0, 9);
+        if (gamesList.length > 0) { // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter SON 9
+            return res.status(200).send(gamesList)
+        } else { // Si no existe ninguna receta mostrar un mensaje adecuado
+            return res.status(400).send(`Recipes containing ${name} not found.`);
+        }
+    } else {
+        if (allRecipes.length > 0) {
+            return res.status(200).send(allRecipes);
+        } else {
+            res.status(400).send(`Recipes not found.`);
+        }
+    }
+});
 // GET /recipes/{idReceta}:
-// Obtener el detalle de una receta en particular
-// Debe traer solo los datos pedidos en la ruta de detalle de receta
-// Incluir los tipos de dieta asociados
+router.get('/:id', async (req, res) => {
+    // Obtener el detalle de una receta en particular
+    // Debe traer solo los datos pedidos en la ruta de detalle de receta
+    // Incluir los tipos de dieta asociados
+    const {id} = req.params;
+    if (id) {
+        let recipeFound = await getRecipeById(id);
+        if (recipeFound) return res.status(200).send(recipeFound);
+        else return res.status(404).send(`Recipes not found.`);
+    }
+})
