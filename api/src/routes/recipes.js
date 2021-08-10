@@ -1,14 +1,15 @@
 const { Router } = require('express');
 const axios = require('axios');
-const { Recipe, Diet, RexipeXDiet } = require('../db');
+const { Recipe, Diet } = require('../db');
 const { URL_ALL, URL_BY_ID } = require('../utils/constants');
 const { API_KEY } = process.env;
+const router = Router();
 
 // ---------------- //
 const getAllApi = async () => {
     let callResponse = await axios.getAllApi(`${URL_ALL}?apiKey=${API_KEY}${URL_INFO}&number=100`); // el max de 100 recetas
     let allApiRecipes = callResponse.data.results.map( recipe => {
-        let dietTypes = recipe.diets.map((diet) => (diet = {name: diet}));
+        let diets = recipe.diets.map((diet) => (diet = {name: diet}));
         return {
             id: recipe.id,
             title: recipe.title,
@@ -16,7 +17,7 @@ const getAllApi = async () => {
             // healthScore: recipe.healthScore,
             // analyzedInstructions: recipe.analyzedInstructions,
             image: recipe.image,
-            Diets: dietTypes,
+            Diets: diets,
         };
     });
     return allApiRecipes;
@@ -78,10 +79,10 @@ router.get('/', async (req, res) => {
     const {name} = req.query;
     let allRecipes = await getAllRecipes();
     if (name) {
-        let gameFound = allRecipes.filter(e => e.title.toLowerCase().includes(name.toLowerCase()));
-        let gamesList = gameFound.slice(0, 9);
-        if (gamesList.length > 0) { // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter SON 9
-            return res.status(200).send(gamesList)
+        let recipeFound = allRecipes.filter(e => e.title.toLowerCase().includes(name.toLowerCase()));
+        let recipesList = recipeFound.slice(0, 9);
+        if (recipesList.length > 0) { // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter SON 9
+            return res.status(200).send(recipesList);
         } else { // Si no existe ninguna receta mostrar un mensaje adecuado
             return res.status(400).send(`Recipes containing ${name} not found.`);
         }
@@ -104,4 +105,4 @@ router.get('/:id', async (req, res) => {
         if (recipeFound) return res.status(200).send(recipeFound);
         else return res.status(404).send(`Recipes not found.`);
     }
-})
+});
