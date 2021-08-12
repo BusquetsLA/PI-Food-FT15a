@@ -1,10 +1,10 @@
 const { Router } = require('express');
 const { Recipe, Diet } = require('../db');
-const route = Router();
+const router = Router();
 // POST /recipe:
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
 // Crea una receta en la base de datos
-route.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     const { title, summary, spoonacularScore, healthScore, annalyzedInstructions, image, diets } = req.body; // form data or super long JSON data
     if(!title || !summary) return res.status(400).send('notNull Violation: Necessary parameters are required.');
     const createdRecipe = await Recipe.create({

@@ -106,3 +106,5 @@ router.get('/:id', async (req, res) => {
         else return res.status(404).send(`Recipes not found.`);
     }
 });
+
+module.exports = router;
