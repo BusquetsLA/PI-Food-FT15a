@@ -9,7 +9,7 @@ const dietTypes = [
     "gluten free",
     "ketogenic",
     "vegetarian",
-    "lacto ovo vegetarian",
+    "lacto ovo vegetarian", // asi te llega de la api
     "vegan",
     "pescatarian",
     "paleolithic",
@@ -29,4 +29,4 @@ router.get('/', async (req, res) => { // la forma de hacerlo: trayendo todas las
     return res.status(200).send(diets);
 });
 
-module.exports = router; // deberia estar terminada
+module.exports = router; // anda

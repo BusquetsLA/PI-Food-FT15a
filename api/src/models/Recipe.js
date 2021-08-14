@@ -25,6 +25,7 @@ module.exports = (sequelize) => {
     },
     analyzedInstructions: { // paso a paso
       type: DataTypes.JSON, // VEREMOS DIJO EL CIEGO
+      // type: DataTypes.TEXT
     },
     image : {
       type: DataTypes.STRING,

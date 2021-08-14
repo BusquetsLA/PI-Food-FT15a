@@ -6,7 +6,7 @@ const router = Router();
 // Crea una receta en la base de datos
 router.post('/', async (req, res) => {
     const { title, summary, spoonacularScore, healthScore, annalyzedInstructions, image, diets } = req.body; // form data or super long JSON data
-    if(!title || !summary) return res.status(400).send('notNull Violation: Necessary parameters are required.');
+    if(!title || !summary) return res.status(400).send('notNull Violation: Necessary parameters are required.'); // anda
     const createdRecipe = await Recipe.create({
         title: title,
         summary: summary,

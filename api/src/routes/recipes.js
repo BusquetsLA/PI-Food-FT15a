@@ -1,13 +1,13 @@
 const { Router } = require('express');
 const axios = require('axios');
 const { Recipe, Diet } = require('../db');
-const { URL_ALL, URL_BY_ID } = require('../utils/constants');
+const { URL_ALL, URL_BY_ID, URL_INFO } = require('../utils/constants');
 const { API_KEY } = process.env;
 const router = Router();
 
 // ---------------- //
 const getAllApi = async () => {
-    let callResponse = await axios.getAllApi(`${URL_ALL}?apiKey=${API_KEY}${URL_INFO}&number=100`); // el max de 100 recetas
+    let callResponse = await axios.get(`${URL_ALL}?apiKey=${API_KEY}${URL_INFO}&number=100`); // el max de 100 recetas
     let allApiRecipes = callResponse.data.results.map( recipe => {
         let diets = recipe.diets.map((diet) => (diet = {name: diet}));
         return {
@@ -20,7 +20,7 @@ const getAllApi = async () => {
             Diets: diets,
         };
     });
-    return allApiRecipes;
+    return allApiRecipes; // anda
 };
 const getAllDb = async () => {
     let allDbRecipes = await Recipe.findAll({
@@ -37,7 +37,6 @@ const getAllRecipes = async () => {
     let allRecipes = [...allDbRecipes, ...allApiRecipes];
     return allRecipes;
 };
-
 const getRecipeById = async (id) => {
     if (id.includes('-')) { // uuidv4
         try {
@@ -50,11 +49,11 @@ const getRecipeById = async (id) => {
             });
             return recipeFound;
         } catch (error) {
-            next(error);
+            return error;
         }
     } else {
         try {
-            let callResponse = await axios.getAllApi(`${URL_BY_ID}${id}/information?apiKey=${API_KEY}`);
+            let callResponse = await axios.get(`${URL_BY_ID}${id}/information?apiKey=${API_KEY}`);
             let recipe = callResponse.data;
             let dietTypes = recipe.diets.map((diet) => (diet = {name: diet})); // le carga los tipos de dieta en un array
             let recipeFound = {
@@ -69,10 +68,10 @@ const getRecipeById = async (id) => {
             };
             return recipeFound;
         } catch (error) {
-            next(error);
+            return error;
         }
     }
-};
+}; // anda
 // ---------------- //
 // GET /recipes?name="...":
 router.get('/', async (req, res) => {
@@ -93,7 +92,7 @@ router.get('/', async (req, res) => {
             res.status(400).send(`Recipes not found.`);
         }
     }
-});
+}); // anda
 // GET /recipes/{idReceta}:
 router.get('/:id', async (req, res) => {
     // Obtener el detalle de una receta en particular
@@ -103,8 +102,8 @@ router.get('/:id', async (req, res) => {
     if (id) {
         let recipeFound = await getRecipeById(id);
         if (recipeFound) return res.status(200).send(recipeFound);
-        else return res.status(404).send(`Recipes not found.`);
+        else return res.status(400).send(`Recipes not found.`);
     }
-});
+}); // ya anda
 
 module.exports = router;
