@@ -1,0 +1,54 @@
+import { GET_RECIPES, GET_BY_NAME, GET_RECIPE_DETAIL, CLEAR_RECIPE_DETAIL, ORDER_RECIPES, GET_DIETS, FILTER_DIET } from '../actions/index';
+
+const initialState = {
+    recipes: [],
+    diets: [],
+    recipeDetails: [],
+    filteredRecipes: [],
+};
+function rootReducer (state = initialState, action) {
+    switch (action.type) {
+        // RECIPES
+        case GET_RECIPES:
+            return {
+                ...state,
+                recipes: action.payload,
+                filteredRecipes:action.payload
+            }
+        case GET_BY_NAME:
+            return {
+                ...state,
+                recipes: action.payload,
+            };
+        case GET_RECIPE_DETAIL:
+            return {
+                ...state,
+                recipeDetails: action.payload
+            };
+        case CLEAR_RECIPE_DETAIL:
+            return {
+                ...state,
+                recipeDetails: action.payload
+            };
+        // ORDER
+        case ORDER_RECIPES:
+            return {
+                ...state,
+                recipes: GetRecipesOrder(action.payload, state.filteredRecipes) // payload es 
+            };
+        // DIETS
+        case GET_DIETS:
+            return {
+                ...state,
+                diets: action.payload
+            };
+        case FILTER_DIET:
+            return {
+                ...state,
+                recipes: filterByDiet(action.payload, state.filteredRecipes)
+            };
+        default:
+            return state;
+    };
+};
+export default rootReducer;
