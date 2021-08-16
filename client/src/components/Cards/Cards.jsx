@@ -9,8 +9,6 @@ import Paginate from '../Paginate/Paginate';
 export const Cards = () => {
     const dispatch = useDispatch()
     const allRecipes = useSelector((state) => state.recipes);
-    // const recipesFilteredByDiet = useSelector((state) => state.recipesFilteredByDiet)
-    // const filterName = useSelector((state) => state.filterName)
     const [currentPage, setCurrentPage] = useState(1);
     const recipesPerPage = 9;
     const indexLastRecipe = currentPage * recipesPerPage;
@@ -39,6 +37,6 @@ export const Cards = () => {
                 <Paginate recipesPerPage={recipesPerPage} paginate={paginate} />
             </div>
         </div>
-    )
+    );
 };
 export default Cards;

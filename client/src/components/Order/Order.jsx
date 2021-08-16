@@ -19,12 +19,13 @@ export const Order = () => {
 
     return (
         <div>
+            <h3>yo soy order</h3>
             <div>
                 <h3>Order</h3>
                 <select onChange={(e) => handleOrder(e)}>
                     <option value="All">All</option>
-                    <option value="name_asc"> A-Z </option>
-                    <option value="name_desc"> Z-A </option>
+                    <option value="name_asc"> A - Z </option>
+                    <option value="name_desc"> Z - A </option>
                 </select>
             </div>
             <div>
@@ -37,7 +38,7 @@ export const Order = () => {
             </div>
             <div>
                 <h3>Diet</h3>
-                <select className="boton" onChange={(e) => handleDiets(e)}>
+                <select onChange={(e) => handleDiets(e)}>
                     <option value="all">Diets</option>
                     {diets &&
                         diets.map((type, i) => (

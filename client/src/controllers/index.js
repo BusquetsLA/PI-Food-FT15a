@@ -17,7 +17,7 @@ export const orderByParam = (order, array) => {
                     return -1;
                 }
             });
-        case "score_higher":
+        case 'score_lower':
             return recipes.sort((a, b) => {
                 if (a.spoonacularScore > b.spoonacularScore) {
                     return 1;
@@ -25,7 +25,7 @@ export const orderByParam = (order, array) => {
                     return -1;
                 }
             });
-            case "score_lower":
+            case 'score_higher':
                 return recipes.sort((a, b) => {
                     if (a.spoonacularScore < b.spoonacularScore) {
                         return 1;

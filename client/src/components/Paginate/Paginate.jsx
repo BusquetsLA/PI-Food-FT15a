@@ -10,6 +10,7 @@ export const Paginate = ({ recipesPerPage, pagination }) => {
 
     return (
         <div>
+            <h3>yo soy paginate</h3>
             <ul>
                 {pageNumbers &&
                 pageNumbers.map(number => (
@@ -21,4 +22,4 @@ export const Paginate = ({ recipesPerPage, pagination }) => {
         </div>
     );
 };
-export default Paginate; // deberia estar
+export default Paginate;

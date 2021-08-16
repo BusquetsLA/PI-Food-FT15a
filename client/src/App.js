@@ -12,9 +12,8 @@ function App() {
       <Route exact path='/' component={Landing}/>
        <Route exact path='/home' component={Home}/>
        <Route path='/detail/:id' component={Detail} />
-       <Route exact path='/createRecipe' component={Create}/>
+       <Route exact path='/create' component={Create}/>
     </div>
   );
-}
-
+};
 export default App;

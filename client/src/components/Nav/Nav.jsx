@@ -7,7 +7,7 @@ export const Nav = () => {
     return (
         <div>
             <div>
-                <img src={logo} width='70' height='55'/>
+                <img src={logo} alt='app logo' width='70' height='55'/>
                 {/*<img src={logo}/>*/}
                 <h1>Spoonacular App</h1>
             </div>
@@ -18,7 +18,7 @@ export const Nav = () => {
                 <Link to='/home'>
                     HOME
                 </Link>
-                <Link to='/createRecipe'>
+                <Link to='/create'>
                     CREATE RECIPE
                 </Link>
             </div>

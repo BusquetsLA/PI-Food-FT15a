@@ -44,11 +44,11 @@ export const getRecipeDetail = (id) => async (dispatch) => { // click recipe -->
     }
 };
 export const clearRecipeDetail = () => (dispatch) => {
-    dispatch({type:CLEAR_RECIPE_DETAIL,payload:[]}); // retorna el payload vacio
+    dispatch({type:CLEAR_RECIPE_DETAIL, payload:[]}); // retorna el payload vacio
 };
 // ------------- //
 export const orderRecipes = (type) => (dispatch) => {
-    dispatch({type:ORDER_RECIPES,payload: type});
+    dispatch({type:ORDER_RECIPES, payload: type});
 };
 // ------------- //
 export const getDiets = () => async (dispatch) => {
