@@ -9,7 +9,6 @@ import Nav from '../Nav/Nav';
 export const Home = () => {
     return (
         <div>
-            <h1>YO SOY HOME</h1>
             <div>
                 <Nav />
             </div>

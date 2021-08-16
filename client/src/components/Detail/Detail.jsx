@@ -4,47 +4,44 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
 import { getRecipeDetail, clearRecipeDetail } from '../../actions/index';
+import recipePicture from '../../assets/recipePicture.png';
 
 export const Detail = (props) => {
-
     const {id} = useParams();
     // console.log('esto es params(id) ', params)
     const recipeDetails = useSelector(state => state.recipeDetails);
-    const array = recipeDetails.analyzedInstructions;
+    const recipeStepByStep = recipeDetails.analyzedInstructions; // dentro estan los steps
+    // const recipeSummary = recipeDetails.summary;
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getRecipeDetail(id));
     }, [dispatch, id]);
-
     useEffect(()=>{
         return dispatch(clearRecipeDetail());
     },[]);
 
+    function summary () {
+      return  {__html: recipeDetails.summary}; // gracias totales
+    };
+
     return (
         <div>
-            <h1> YO SOY DETAIL </h1>
             <h2>{recipeDetails.title}</h2>
             <div>
-                {recipeDetails.image? <img src={recipeDetails.image} className='image' alt='recipe picture' />: null}
+            <img src={ recipeDetails.image ? recipeDetails.image : recipePicture } className='image' alt='recipe picture' />
             </div>
             <div>
                 <h3> Summary: </h3>
-                <p>{recipeDetails.summary}</p>
+                <p dangerouslySetInnerHTML={summary()}></p>
             </div>
             <div>
                 <div>
                     <h4> Diets: </h4>
-                        {recipeDetails.Diets
-                            ? <ul>{recipeDetails.Diets && recipeDetails.Diets.map((el, i) =>(<li key={i} >{el.name}</li>))}</ul>
-                            : null}
+                    {recipeDetails.Diets
+                        ? <ul>{recipeDetails.Diets && recipeDetails.Diets.map((el, i) =>(<li key={i} >{el.name}</li>))}</ul>
+                        : null}
                 </div>
-                {/* <div>
-                    <h4>Categoria: </h4>
-                    {recipeDetails.dishTypes
-                        ? <ul>{recipeDetails.dishTypes && recipeDetails.dishTypes.map((el, i) =>( <li key={i}>{el}</li>))}</ul>
-                        : null} 
-                </div> */}
                 <div>
                     <h4> Health Score: {recipeDetails.healthScore}</h4>
                 </div>
@@ -54,7 +51,7 @@ export const Detail = (props) => {
                 <div>
                     <h4> Instructions: </h4>
                     {/* {console.log(array)} */}
-                    {array && array[0].steps.map((el, i) =>( <li key={i} >{el.step}</li>))} 
+                    <ul>{recipeStepByStep && recipeStepByStep[0].steps.map((el, i) =>( <li key={i} >{el.step}</li>))}</ul>
                 </div>
             </div>
             <div>

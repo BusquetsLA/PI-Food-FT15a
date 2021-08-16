@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getRecipes } from '../../actions/index';
 import Card from '../Card/Card';
 import Paginate from '../Paginate/Paginate';
+import recipePicture from '../../assets/recipePicture.png';
 
 
 export const Cards = () => {
@@ -30,8 +31,9 @@ export const Cards = () => {
                         key={el.id}
                         id={el.id}
                         title={el.title}
-                        image={el.image}
+                        image={el.image?el.image:recipePicture}
                         diets={el.diets}
+                        // recipeDetails.image ? recipeDetails.image : recipePicture
                     />
                 ))}
             </div>

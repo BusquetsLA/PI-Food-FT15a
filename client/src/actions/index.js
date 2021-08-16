@@ -6,7 +6,8 @@ GET_RECIPE_DETAIL = 'GET_RECIPE_DETAIL',
 CLEAR_RECIPE_DETAIL = 'CLEAR_RECIPE_DETAIL',
 ORDER_RECIPES = 'ORDER_RECIPES',
 GET_DIETS = 'GET_DIETS',
-FILTER_DIET = 'FILTER_DIET';
+FILTER_DIET = 'FILTER_DIET'/*,
+CREATE_RECIPE = 'CREATE_RECIPE'*/;
 
 // http://localhost:3001/recipes
 // http://localhost:3001/recipes?name=salmon
@@ -36,7 +37,7 @@ export const getRecipeByName = (name) => async (dispatch) => { // buscador --> s
 };
 export const getRecipeDetail = (id) => async (dispatch) => { // click recipe --> id
     try {
-        console.log('esto es id ' + id)
+        // console.log('esto es id ' + id)
         const res = await axios.get(`http://localhost:3001/recipes/${id}`);
         dispatch({ type: GET_RECIPE_DETAIL, payload: res.data });
     } catch (err) {
@@ -66,3 +67,13 @@ export const filterByDiet = (type) => (dispatch) => {
     dispatch({type: FILTER_DIET, payload: type});
 };
 // ------------- //
+/*
+export const createRecipe = (recipe) => async (dispatch) => {
+    try {
+        const res = await axios.post('http://localhost:3001/recipe', recipe);
+        return dispatch({type: CREATE_RECIPE , payload: res.data});
+    } catch (err) {
+        console.log(err);
+    }
+};
+*/

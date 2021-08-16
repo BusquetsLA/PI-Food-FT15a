@@ -1,4 +1,4 @@
-import { GET_RECIPES, GET_BY_NAME, GET_RECIPE_DETAIL, CLEAR_RECIPE_DETAIL, ORDER_RECIPES, GET_DIETS, FILTER_DIET } from '../actions/index';
+import { GET_RECIPES, GET_BY_NAME, GET_RECIPE_DETAIL, CLEAR_RECIPE_DETAIL, ORDER_RECIPES, GET_DIETS, FILTER_DIET/*, CREATE_RECIPE*/ } from '../actions/index';
 import { orderByParam, filterByDiet } from '../controllers/index';
 
 const initialState = {
@@ -6,6 +6,7 @@ const initialState = {
     diets: [],
     recipeDetails: [],
     filteredRecipes: [],
+    createdRecipe: [],
 };
 function rootReducer (state = initialState, action) {
     switch (action.type) {
@@ -48,6 +49,12 @@ function rootReducer (state = initialState, action) {
                 ...state,
                 recipes: filterByDiet(action.payload, state.filteredRecipes)
             };
+        // CREATE
+        /*case CREATE_RECIPE:
+            return{
+                ...state,
+                createdRecipe: action.payload
+            };*/
         default:
             return state;
     };

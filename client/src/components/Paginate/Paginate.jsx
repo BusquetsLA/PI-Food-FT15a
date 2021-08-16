@@ -10,7 +10,6 @@ export const Paginate = ({ recipesPerPage, allRecipes, paginate }) => {
 
     return (
         <div>
-            <h3>YO SOY PAGINADO</h3>
             <ul>
                 {console.log(pageNumbers)}
                 {pageNumbers &&

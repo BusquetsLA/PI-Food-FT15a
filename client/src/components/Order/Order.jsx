@@ -19,7 +19,6 @@ export const Order = () => {
 
     return (
         <div>
-            <h3>yo soy order</h3>
             <div>
                 <h3>Order</h3>
                 <select onChange={(e) => handleOrder(e)}>
