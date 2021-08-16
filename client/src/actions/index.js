@@ -25,7 +25,7 @@ export const getRecipes = () => {
         }
     }
 };
-export const getRecipeByName = (name) => async (dispatch) => {
+export const getRecipeByName = (name) => async (dispatch) => { // buscador --> salmon
     try {
         const res = await axios.get(`http://localhost:3001/recipes?name=${name}`);
         dispatch({ type: GET_BY_NAME, payload: res.data });
@@ -34,7 +34,7 @@ export const getRecipeByName = (name) => async (dispatch) => {
         return dispatch({type: GET_BY_NAME, payload: []});
     }
 };
-export const getRecipeDetail = (id) => async (dispatch) => {
+export const getRecipeDetail = (id) => async (dispatch) => { // click recipe --> id
     try {
         const res = await axios.get(`http://localhost:3001/recipes/${id}`);
         dispatch({ type: GET_RECIPE_DETAIL, payload: res.data });

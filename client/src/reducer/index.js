@@ -1,7 +1,8 @@
 import { GET_RECIPES, GET_BY_NAME, GET_RECIPE_DETAIL, CLEAR_RECIPE_DETAIL, ORDER_RECIPES, GET_DIETS, FILTER_DIET } from '../actions/index';
+import { orderByParam, filterByDiet } from '../controllers/index';
 
 const initialState = {
-    recipes: [],
+    recipes: [], // todos los recipes cargados de getRecipes
     diets: [],
     recipeDetails: [],
     filteredRecipes: [],
@@ -34,7 +35,7 @@ function rootReducer (state = initialState, action) {
         case ORDER_RECIPES:
             return {
                 ...state,
-                recipes: GetRecipesOrder(action.payload, state.filteredRecipes) // payload es 
+                recipes: orderByParam(action.payload, state.filteredRecipes)
             };
         // DIETS
         case GET_DIETS:
