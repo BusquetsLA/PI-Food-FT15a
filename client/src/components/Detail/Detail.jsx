@@ -5,15 +5,17 @@ import { useParams } from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
 import { getRecipeDetail, clearRecipeDetail } from '../../actions/index';
 
-export const Detail = () => {
+export const Detail = (props) => {
 
-    const {recipeId} = useParams();
+    const {id} = useParams();
+    // console.log('esto es params(id) ', params)
     const recipeDetails = useSelector(state => state.recipeDetails);
+    const array = recipeDetails.analyzedInstructions;
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getRecipeDetail(recipeId));
-    }, [dispatch, recipeId]);
+        dispatch(getRecipeDetail(id));
+    }, [dispatch, id]);
 
     useEffect(()=>{
         return dispatch(clearRecipeDetail());
@@ -33,8 +35,8 @@ export const Detail = () => {
             <div>
                 <div>
                     <h4> Diets: </h4>
-                        {recipeDetails.diets
-                            ? <ul>{recipeDetails.diets && recipeDetails.diets.map((el, i) =>(<li key={i} >{el.name}</li>))}</ul>
+                        {recipeDetails.Diets
+                            ? <ul>{recipeDetails.Diets && recipeDetails.Diets.map((el, i) =>(<li key={i} >{el.name}</li>))}</ul>
                             : null}
                 </div>
                 {/* <div>
@@ -51,7 +53,8 @@ export const Detail = () => {
                 </div>
                 <div>
                     <h4> Instructions: </h4>
-                        {recipeDetails.analyzedInstructions && recipeDetails.analyzedInstructions.map((el, i) =>( <li key={i} >{el.step.steps}</li>))}
+                    {/* {console.log(array)} */}
+                    {array && array[0].steps.map((el, i) =>( <li key={i} >{el.step}</li>))} 
                 </div>
             </div>
             <div>
@@ -63,3 +66,69 @@ export const Detail = () => {
     );
 };
 export default Detail;
+/*
+"analyzedInstructions": [
+    {
+      "name": "",
+      "steps": [
+        {
+          "number": 1,
+          "step": "Heat the olive oil in a large pot over medium heat.",
+          "ingredients": [
+            {
+              "id": 4053,
+              "name": "olive oil",
+              "localizedName": "olive oil",
+              "image": "olive-oil.jpg"
+            }
+          ],
+          "equipment": [
+            {
+              "id": 404752,
+              "name": "pot",
+              "localizedName": "pot",
+              "image": "stock-pot.jpg"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "step": "Add the kale and cover.Stir occasionally until the volume of the kale is reduced by half. Uncover.",
+          "ingredients": [
+            {
+              "id": 11233,
+              "name": "kale",
+              "localizedName": "kale",
+              "image": "kale.jpg"
+            }
+          ],
+          "equipment": []
+        },
+        {
+          "number": 3,
+          "step": "Add garlic and basalmic.Allow to cook for about another 30 seconds or so, mixing well so that the garlic and vinegar are well distributed.",
+          "ingredients": [
+            {
+              "id": 2053,
+              "name": "vinegar",
+              "localizedName": "vinegar",
+              "image": "vinegar-(white).jpg"
+            },
+            {
+              "id": 11215,
+              "name": "garlic",
+              "localizedName": "garlic",
+              "image": "garlic.png"
+            }
+          ],
+          "equipment": []
+        },
+        {
+          "number": 4,
+          "step": "Serve hot.",
+          "ingredients": [],
+          "equipment": []
+        }
+      ]
+    }
+]*/

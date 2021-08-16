@@ -8,7 +8,6 @@ export const Nav = () => {
         <div>
             <div>
                 <img src={logo} alt='app logo' width='70' height='55'/>
-                {/*<img src={logo}/>*/}
                 <h1>Spoonacular App</h1>
             </div>
             <div className='search'>

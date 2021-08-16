@@ -36,6 +36,7 @@ export const getRecipeByName = (name) => async (dispatch) => { // buscador --> s
 };
 export const getRecipeDetail = (id) => async (dispatch) => { // click recipe --> id
     try {
+        console.log('esto es id ' + id)
         const res = await axios.get(`http://localhost:3001/recipes/${id}`);
         dispatch({ type: GET_RECIPE_DETAIL, payload: res.data });
     } catch (err) {
