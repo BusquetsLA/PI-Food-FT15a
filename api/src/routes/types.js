@@ -14,8 +14,9 @@ const dietTypes = [
     "pescatarian",
     "paleolithic",
     "primal",
-    "whole30"
-]; // hardcodeo mal pero bueno, la otra forma es hacer 998 ciclos for y un flat para meter todos los diet types en un arreglo pero habria que hardcodear vegan tmb.
+    "whole 30",
+    "fodmap friendly", // esta tmb
+]; // hardcodeo mal pero bueno, la otra forma es hacer 998 ciclos for y un flat para meter todos los diet types en un arreglo
 const setDiet = async () => {
     let filteredDiets = dietTypes.map(diet => diet = {name: diet});
     let diets = await Diet.bulkCreate(filteredDiets);
