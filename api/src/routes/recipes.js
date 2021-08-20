@@ -73,17 +73,17 @@ const getRecipeById = async (id) => {
     }
 }; // anda
 // ---------------- //
-// GET /recipes?name="...":
+// GET /recipes?title="...":
 router.get('/', async (req, res) => {
-    const {name} = req.query;
+    const {title} = req.query;
     let allRecipes = await getAllRecipes();
-    if (name) {
-        let recipeFound = allRecipes.filter(e => e.title.toLowerCase().includes(name.toLowerCase()));
+    if (title) {
+        let recipeFound = allRecipes.filter(e => e.title.toLowerCase().includes(title.toLowerCase()));
         let recipesList = recipeFound.slice(0, 9);
         if (recipesList.length > 0) { // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter SON 9
             return res.status(200).send(recipesList);
         } else { // Si no existe ninguna receta mostrar un mensaje adecuado
-            return res.status(400).send(`Recipes containing ${name} not found.`);
+            return res.status(400).send(`Recipes containing ${title} not found.`);
         }
     } else {
         if (allRecipes.length > 0) {

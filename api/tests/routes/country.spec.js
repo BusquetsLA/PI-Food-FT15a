@@ -20,26 +20,26 @@ describe('Route test', () => {
 			} catch (err) {
 				console.log(err);
 			}
-		}).timeout(47000);
+		}).timeout(60000);
 		it('responds a array whit 100 recipes', async () => {
 			try {
 				const res = await agent.get('/recipes');
-				expect(res.body).to.have.lengthOf(40);
+				expect(res.body).to.have.lengthOf(100);
 			} catch (err) {
 				console.log(err);
 			}
-		}).timeout(47000);
-		it('If the title query is passed, the recipe should respond by that name', async () => {
+		}).timeout(60000);
+		it('If the title query is passed, the recipe should respond by that title', async () => {
 			try {
 				const res = await agent.get('/recipes?title=pasta');
-				expect(res.body[0].name).to.be.equal('pasta');
+				expect(res.body[0].title).to.be.equal('pasta');
 			} catch (err) {}
-		}).timeout(47000);
+		}).timeout(60000);
 		it('If an id parameter is passed it must return the recipe associated with that id', async () => {
 			try {
 				const res = await agent.get('/recipes/716381');
 				expect(res.body[0].name).to.be.equal('Nigerian Snail Stew');
 			} catch (err) {}
-		}).timeout(47000);
+		}).timeout(60000);
 	});
 });
