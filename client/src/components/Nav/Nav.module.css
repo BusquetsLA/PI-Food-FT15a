@@ -1,0 +1,40 @@
+.container{
+    background-color:black;
+    display: flex;
+    justify-content: space-between;
+    font-size: calc(1.5vmin);
+    color: white;
+}
+.btnContainer{
+    display: flex;
+    justify-content: space-between;
+
+}
+.searchAndLinks{
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.search{
+    display: flex;
+    align-items:flex-start;
+}
+.btn{
+    background-color: #282c34;
+    border: 2px solid #000;
+    border-radius: 5px;
+    color: white;
+    margin: 10px;
+    height: 30px;
+}
+.btn:hover{
+    background-color: rgb(175, 114, 34);
+}
+.logo{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}

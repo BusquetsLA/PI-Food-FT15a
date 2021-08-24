@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import { getRecipes, getRecipeByName } from '../../actions/index';
+import styles from './SearchBar.module.css';
 
 export const SearchBar = () => {
 
@@ -31,6 +32,7 @@ export const SearchBar = () => {
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <input
+                    className={styles.searchBar}
                     type='text'
                     placeholder='Recipe name...'
                     autoComplete='off'
@@ -38,10 +40,10 @@ export const SearchBar = () => {
                     name='title'
                     onChange={(e) => handleChange(e)} 
                 />
-                <button type='submit'> Search </button>
+                <button className={styles.btn} type='submit'> SEARCH </button>
             </form>
         </div>
     );
 };
 
-export default SearchBar; // deberia estar
+export default SearchBar;

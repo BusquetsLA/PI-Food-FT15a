@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+import styles from './Paginate.module.css';
 
 export const Paginate = ({ recipesPerPage, allRecipes, paginate }) => {
     const pageNumbers = [];
@@ -9,17 +10,13 @@ export const Paginate = ({ recipesPerPage, allRecipes, paginate }) => {
     }
 
     return (
-        <div>
-            <ul>
-                {console.log(pageNumbers)}
-                {pageNumbers &&
-                pageNumbers.map(number => (
-                    <li key={number}>
-                        <button onClick={() => paginate(number)}>{number}</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <nav className={styles.paginate}>
+            {console.log(pageNumbers)}
+            {pageNumbers &&
+            pageNumbers.map(number => (
+                <button className={styles.btn} onClick={() => paginate(number)}>{number}</button>
+            ))}
+        </nav>
     );
 };
 export default Paginate;

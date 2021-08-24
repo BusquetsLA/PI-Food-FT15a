@@ -5,7 +5,7 @@ import { getRecipes } from '../../actions/index';
 import Card from '../Card/Card';
 import Paginate from '../Paginate/Paginate';
 import recipePicture from '../../assets/recipePicture.png';
-
+import styles from './Cards.module.css';
 
 export const Cards = () => {
     const dispatch = useDispatch()
@@ -25,19 +25,18 @@ export const Cards = () => {
 
     return (
         <div>
-            <div>
+            <div className={styles.container}>
                 {allPagRecipes.map((el) => (
                     <Card
                         key={el.id}
                         id={el.id}
                         title={el.title}
                         image={el.image?el.image:recipePicture}
-                        diets={el.diets}
-                        // recipeDetails.image ? recipeDetails.image : recipePicture
+                        diets={el.Diets}
                     />
                 ))}
             </div>
-            <div>
+            <div className={styles.paginate}>
                 <Paginate recipesPerPage={recipesPerPage} allRecipes={allRecipes} paginate={paginate} />
             </div>
         </div>

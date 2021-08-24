@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
 import { getRecipeDetail, clearRecipeDetail } from '../../actions/index';
 import recipePicture from '../../assets/recipePicture.png';
+import styles from './Detail.module.css';
 
 export const Detail = (props) => {
     const {id} = useParams();
@@ -26,7 +27,7 @@ export const Detail = (props) => {
     };
 
     return (
-        <div>
+        <div className={styles.container}>
             <h2>{recipeDetails.title}</h2>
             <div>
             <img src={ recipeDetails.image ? recipeDetails.image : recipePicture } className='image' alt='recipe picture' />

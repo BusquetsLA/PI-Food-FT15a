@@ -1,0 +1,39 @@
+.container{
+    min-height: 100vh;
+    background: url("../../assets/bg1.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}
+.welcome{
+    background: #282c34;
+}
+.title{
+    color: white;
+    font-size: 40px;
+    margin-left: 60px;
+    margin-right: 20px;
+}
+.msg{
+    color: white;
+    font-size: 25px;
+    margin-left: 60px;
+    margin-right: 20px;
+}
+.btn{
+    background-color: #282c34;
+    border: 2px solid #000;
+    border-radius: 5px;
+    color: white;
+    margin: 10px;
+    font-size: 25px;
+}
+.btn:hover{
+    background-color: rgb(175, 114, 34);
+}

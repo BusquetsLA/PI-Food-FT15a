@@ -1,27 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link/*, useHistory*/ } from 'react-router-dom';
 import  SearchBar from '../SearchBar/SearchBar';
 import logo from '../../assets/cooking.png';
+import styles from './Nav.module.css';
 
 export const Nav = () => {
+    // const history = useHistory();
     return (
-        <div>
-            <div>
+        <div className={styles.container}>
+            <div className={styles.logo}>
                 <img src={logo} alt='app logo' width='70' height='55'/>
                 <h1>Spoonacular App</h1>
             </div>
-            <div className='search'>
+            <div className={styles.search}>
                 <SearchBar/>
             </div>
-            <div>
+            <div className={styles.btnContainer}>
                 <Link to='/home'>
-                    HOME
+                    <button className={styles.btn}> HOME </button> 
                 </Link>
                 <Link to='/create'>
-                    CREATE RECIPE
+                    <button className={styles.btn}> CREATE RECIPE </button> 
                 </Link>
             </div>
         </div>
     );
 };
-export default Nav; // estaria
+export default Nav;

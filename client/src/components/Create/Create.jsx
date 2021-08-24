@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { getDiets, createRecipe } from '../../actions/index';
+import styles from './Create.module.css';
 
 export function validate (input) {
     let errors = {}
@@ -90,88 +91,90 @@ export const Create = () => {
     };
 
     return (
-        <div>
-            <h1> Create your own recipe </h1>
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <div>
-                    <label className='label'>Recipe title: </label>
-                    <input
-                        className={`${errors.title && "danger"}`}
-                        type="text"
-                        name="title"
-                        value={input.title}
-                        onChange={handleInputChange}
-                    /> {errors.title && (<p className="danger">{errors.title}</p>)}
-                </div>
-                <div>
-                    <label className='label'>Recipe summary: </label>
-                    <input
-                        className={`${errors.summary && "danger"}`}
-                        type="text"
-                        name="summary"
-                        value={input.summary}
-                        onChange={handleInputChange}
-                    /> {errors.summary && (<p className="danger">{errors.summary}</p>)}
-                </div>
-                <div>
-                    <label className='label'>Recipe score: </label>
-                    <input
-                        className={`${errors.spoonacularScore && "danger"}`}
-                        type="number"
-                        min="0"
-                        max="100"
-                        name="spoonacularScore"
-                        value={input.spoonacularScore}
-                        onChange={handleInputChange}
-                    /> {errors.spoonacularScore && (<p className="danger">{errors.spoonacularScore}</p>)}
-                </div>
-                <div>
-                    <label className='label'>Health score: </label>
-                    <input
-                        className={`${errors.healthScore && "danger"}`}
-                        type="number"
-                        min="0"
-                        max="100"
-                        name="healthScore"
-                        value={input.healthScore}
-                        onChange={handleInputChange}
-                    /> {errors.healthScore && (<p className="danger">{errors.healthScore}</p>)}
-                </div>
-                <div>
-                    <label className='label'>Instructions: </label>
-                    <textarea
-                        onChange={handleInputChange}
-                        className="text"
-                        type="text"
-                        name="analyzedInstructions"
-                        value={input.analyzedInstructions}
-                    ></textarea>
-                </div>
-                <div className="checkbox">
-                    <label className='label'>Pick the diet/s: </label>
-                    <div>
-                        {diets.map(diet => 
-                            <span key={diet.name}>
-                                <input
-                                    className="input_diets"
-                                    type="checkbox"
-                                    name="diets"
-                                    value={diet.id}
-                                    onChange={handleCheckbox}
-                                />
-                                <label name={diet}>{diet.name}</label>
-                            </span>
-                        )}
+        <div className={styles.container}>
+            <div className={styles.form}>
+                <h1> Create your own recipe! </h1>
+                <form onSubmit={(e) => handleSubmit(e)}>
+                    <div className={styles.labelAndInput}>
+                        <label className='label'>Recipe title: </label>
+                        <input
+                            className={`${errors.title && "danger"}`}
+                            type="text"
+                            name="title"
+                            value={input.title}
+                            onChange={handleInputChange}
+                        /> {errors.title && (<p className="danger">{errors.title}</p>)}
                     </div>
-                </div>
+                    <div className={styles.labelAndInput}>
+                        <label className='label'>Recipe summary: </label>
+                        <input
+                            className={`${errors.summary && "danger"}`}
+                            type="text"
+                            name="summary"
+                            value={input.summary}
+                            onChange={handleInputChange}
+                        /> {errors.summary && (<p className="danger">{errors.summary}</p>)}
+                    </div>
+                    <div className={styles.labelAndInput}>
+                        <label className='label'>Recipe score: </label>
+                        <input
+                            className={`${errors.spoonacularScore && "danger"}`}
+                            type="number"
+                            min="0"
+                            max="100"
+                            name="spoonacularScore"
+                            value={input.spoonacularScore}
+                            onChange={handleInputChange}
+                        /> {errors.spoonacularScore && (<p className="danger">{errors.spoonacularScore}</p>)}
+                    </div>
+                    <div className={styles.labelAndInput}>
+                        <label className='label'>Health score: </label>
+                        <input
+                            className={`${errors.healthScore && "danger"}`}
+                            type="number"
+                            min="0"
+                            max="100"
+                            name="healthScore"
+                            value={input.healthScore}
+                            onChange={handleInputChange}
+                        /> {errors.healthScore && (<p className="danger">{errors.healthScore}</p>)}
+                    </div>
+                    <div className={styles.labelAndInput}>
+                        <label className='label'>Instructions: </label>
+                        <textarea
+                            onChange={handleInputChange}
+                            className="text"
+                            type="text"
+                            name="analyzedInstructions"
+                            value={input.analyzedInstructions}
+                        ></textarea>
+                    </div>
+                    <div className={styles.labelAndInput}>
+                        <label className='label'>Pick the diet/s: </label>
+                        <div>
+                            {diets.map(diet => 
+                                <span key={diet.name}>
+                                    <input
+                                        className="input_diets"
+                                        type="checkbox"
+                                        name="diets"
+                                        value={diet.id}
+                                        onChange={handleCheckbox}
+                                    />
+                                    <label name={diet}>{diet.name}</label>
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                    <div>
+                        <button className={styles.btn} type='submit'> Submit! </button>
+                    </div>
+                </form>
                 <div>
-                    <button type='submit'> Submit! </button>
+                    <Link to='/home'>
+                        <button className={styles.btn}> Back </button> 
+                    </Link>
                 </div>
-            </form>
-            <div>
-                <Link to='/home'>
-                    <button>Back</button> 
-                </Link>
             </div>
         </div>
     );

@@ -1,8 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
-
+/*
 test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+  let wrapper
+  beforeEach(() => {
+    wrapper = shallow(<App />)
+  })
+  it('It should render a <div />', () => {
+    expect(wrapper.find(div)).toHaveLength(1)
+  })
+});*/
