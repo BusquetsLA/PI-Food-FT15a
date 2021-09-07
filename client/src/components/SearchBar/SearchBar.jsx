@@ -26,7 +26,7 @@ export const SearchBar = () => {
         } else {
             // dispatch(getRecipes());
             // setInput("");
-            alert('You must search a valid name.')
+            alert('You must search a valid name.');
         }
     };
 
