@@ -13,8 +13,9 @@ export const SearchBar = () => {
     }, [dispatch, input]);
 
     const handleChange = (e) => {
+        e.preventDefault();
         setInput(e.target.value);
-        console.log(e.target.value);
+        // console.log(e.target.value);
     };
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,8 +24,9 @@ export const SearchBar = () => {
             dispatch(getRecipeByName(input));
             setInput("");
         } else {
-            dispatch(getRecipes());
-            setInput("");
+            // dispatch(getRecipes());
+            // setInput("");
+            alert('You must search a valid name.')
         }
     };
 
