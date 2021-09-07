@@ -50,9 +50,9 @@ export const getRecipeDetail = (id) => {
     }
   };
 };
-/*export const clearRecipeDetail = () => (dispatch) => {
+export const clearRecipeDetail = () => (dispatch) => {
   return dispatch({ type: CLEAR_RECIPE_DETAIL, payload: [] }); // retorna el payload vacio
-};*/
+};
 export const createRecipe = (recipe) => {
   return async (dispatch) => {
     try {
