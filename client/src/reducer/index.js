@@ -5,7 +5,8 @@ import {
   CLEAR_RECIPE_DETAIL,
   ORDER_RECIPES,
   GET_DIETS,
-  FILTER_DIET /*, CREATE_RECIPE*/,
+  FILTER_DIET,
+  CREATE_RECIPE,
 } from "../actions/index";
 import { orderByParam, filterByDiet } from "../controllers/index";
 
@@ -22,7 +23,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         recipes: action.payload,
-        // filteredRecipes: action.payload
+        filteredRecipes: action.payload
       };
     case GET_BY_NAME:
       return {
